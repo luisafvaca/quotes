@@ -1,0 +1,59 @@
+.cards-wrapper {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 200px;
+    margin: 20px;
+    border: 3px solid transparent;
+    border-image:  linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    padding: 30px;
+    border-image-slice: 1;
+    border-image-width: 1;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bookmark {
+    width: 40px;
+    height: 10px;
+    background-color:rgb(215, 82, 142);
+    position: absolute;
+    top: 0;
+    right: 3px;
+}
+
+.bookmark::after{
+    content: "";
+    width: 0;
+    height: 0;
+    border-bottom: solid 15px transparent;
+    border-right: solid 15px transparent;
+    border-left: solid 15px transparent;
+    border-top: solid 15px rgb(215, 82, 142);
+    position: absolute;
+    transform: rotate(136deg);
+    left: -15px;
+    top: -4px;
+}
+
+.bookmark::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-bottom: solid 15px transparent;
+    border-right: solid 15px transparent;
+    border-left: solid 15px transparent;
+    border-top: solid 15px rgb(215, 82, 142);;
+    position: absolute;
+    -webkit-transform: rotate(136deg);
+    transform: rotate(225deg);
+    left: 24.5px;
+    top: -4px;
+}
