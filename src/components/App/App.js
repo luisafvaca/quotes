@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getQuotesRequest } from '../../actions/Quotes';
 import Quotes from '../Quotes/Quotes';
@@ -47,10 +47,9 @@ class App extends Component {
   }
 
   onGetQuote(){
-    getQuotesRequest()
+    this.props.getQuote()
   }
   componentWillMount(){
-    console.log(this)
     this.setState({
       "quote": "\"At moment not quote avalible click to get one!\""
     })
@@ -76,17 +75,16 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    quotes: state.quotes
+    quotes: state.Quotes
   }
 };
 
-function mapDispatchToProps(dispatch) {
-  console.log(dispatch, 'dsadas')
-  return bindActionCreators({
-    getQuotesRequest,
-  }, dispatch);
-}
-
+const mapDispatchToProps = (dispatch) => {  
+  return {
+    dispatch,
+    getQuote: () => dispatch(getQuotesRequest())
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 

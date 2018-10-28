@@ -19,15 +19,15 @@ export const fetchQuotesFailure = error => ({
 });
 
 export function getQuotesRequest(dispatch) {
-    console.log('entrando',dispatch);
-
-        fetcohQuotessBegin() 
-
-    fetch('https://talaikis.com/api/quotes/random/').then((response) => {        
-        dispatch = () => {fetchQuotesSuccess(response)}
-        return response
+   return (dispatch) => {
+    dispatch(fetcohQuotessBegin());
+    fetch('https://talaikis.com/api/quotes/random/').then((response) => {
+        return response.json()
+    }).then((data)=>{
+        dispatch(fetchQuotesSuccess(data))
     }).catch((error) => {
-        dispatch = () => {fetchQuotesFailure(error)}
+        dispatch(fetchQuotesFailure(error))
     })
+   }
 }
 
