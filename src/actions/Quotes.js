@@ -18,19 +18,16 @@ export const fetchQuotesFailure = error => ({
     data: error
 });
 
-export const test = response => ({
-    type: QUOTES_RESQUEST_SUCCES,
-});
-
 export function getQuotesRequest(dispatch) {
-    dispatch = () => {
-        fetcohQuotessBegin() 
-    }
+    console.log('entrando',dispatch);
 
-    fetch('https://talaikis.com/api/quotes/random/').then((response) => {
+        fetcohQuotessBegin() 
+
+    fetch('https://talaikis.com/api/quotes/random/').then((response) => {        
         dispatch = () => {fetchQuotesSuccess(response)}
         return response
     }).catch((error) => {
         dispatch = () => {fetchQuotesFailure(error)}
     })
 }
+

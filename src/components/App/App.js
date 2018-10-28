@@ -5,8 +5,6 @@ import { getQuotesRequest } from '../../actions/Quotes';
 import Quotes from '../Quotes/Quotes';
 
 import './App.css';
-console.log(Quotes)
-
 
 const testQuoteSaved = [
   {
@@ -52,6 +50,7 @@ class App extends Component {
     getQuotesRequest()
   }
   componentWillMount(){
+    console.log(this)
     this.setState({
       "quote": "\"At moment not quote avalible click to get one!\""
     })
@@ -82,10 +81,12 @@ const mapStateToProps = (state) => {
 };
 
 function mapDispatchToProps(dispatch) {
+  console.log(dispatch, 'dsadas')
   return bindActionCreators({
     getQuotesRequest,
   }, dispatch);
 }
 
-connect(mapStateToProps, mapDispatchToProps)(App);
-export default App;
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
