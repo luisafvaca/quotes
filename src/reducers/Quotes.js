@@ -3,16 +3,18 @@ import {
     QUOTES_RESQUEST_FAILURE
 } from '../actions/Quotes';
 
-import {insert} from 'ramda'
+import { concat } from 'ramda'
 const initialState = {
-    quotes: [],
-}
+    savedQuotes: [],
+    quote: {}
+};
 
 function Quotes(state = initialState, action) {
     switch (action.type) {
-        case QUOTES_RESQUEST_SUCCES: 
-            insert(action.data, state)
-            return action.data;
+        case QUOTES_RESQUEST_SUCCES:
+
+            //concat(state, action.data)
+            return state.quote = action.data;
         case QUOTES_RESQUEST_FAILURE:
             return action.data
         default:

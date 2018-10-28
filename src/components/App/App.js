@@ -50,16 +50,31 @@ class App extends Component {
     this.props.getQuote()
   }
   componentWillMount(){
+    this.props.getQuote();
+    let quote = this.props.quotes.quote ? this.props.quotes : "\"At moment not quote avalible click to get one!\"";
     this.setState({
-      "quote": "\"At moment not quote avalible click to get one!\""
+      "quote": quote
     })
   }
+
+  avalibleQuote(quote){
+    let current = quote.quote;
+    let author = quote.author;
+    return(
+      <div className="quote-zone">
+        <p>{current}</p>
+        <h3>{author}</h3>
+      </div>
+    )
+  }
   render() {
+    const currentQuote = this.avalibleQuote(this.props.quotes);
+    console.log(currentQuote, 'im programing');
+    
     return (
       <section className="app-wrapper">
         <header className="app-header">
           <label>Get Quote</label>
-          <div className="quote-zone">{this.state.quote}</div>
           <div>
             <button onClick={this.onGetQuote}>Get</button>
             <button>Save Quotes</button>
@@ -75,7 +90,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    quotes: state.Quotes
+    quotes: state.quotes
   }
 };
 

@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import Quotes from './Quotes';
+import quotes from './Quotes';
 
 
 const reducers = combineReducers({
-    Quotes
+    quotes
 })
 
 export default reducers;
