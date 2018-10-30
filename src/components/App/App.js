@@ -34,18 +34,21 @@ class App extends Component {
     this.props.quoteSaving(param);
   }
 
-  avalibleQuote(quoteParam){
-    let content = <div>${"\"At moment not quote avalible click to get one!\""}</div>;
-    if(quoteParam){
-      content = (
+  avalibleQuote(quoteParam, onRequest){
+    console.log(onRequest, 'onRequest', quoteParam)
+    if(onRequest){
+      return(<div className="quote-zone">
+        <p>Pending...</p>
+      </div>
+    )
+    }else if(onRequest === false && quoteParam ){
+      return (
         <div className="quote-zone">
-          <p>{quoteParam.quote}</p>
-          <h3>{quoteParam.author}</h3>
-        </div> 
+        <p>{quoteParam.quote}</p>
+        <h3>{quoteParam.author}</h3>
+      </div> 
       )
     }
-    
-    return content
   }
 
   counter(){
@@ -55,8 +58,9 @@ class App extends Component {
 
   render() { 
     const currenQuote = this.props.quotes;
+    const onRequest = this.props.onRequest;
     const savedQuotes = this.props.savedQuotes;
-    const currenQuoteFormat = this.avalibleQuote(currenQuote);
+    const currenQuoteFormat = this.avalibleQuote(currenQuote, onRequest);
 
     return (
       <section className="app-wrapper">
@@ -83,6 +87,7 @@ const mapStateToProps = (state) => {
   return {
     quotes: state.quotes.quote, 
     savedQuotes: state.quotes.savedQuotes,
+    onRequest: state.quotes.onRequest
   }
 };
 
