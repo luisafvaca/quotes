@@ -21,6 +21,8 @@
 
 .quote-zone {
   font-size: 15px;
+  width: 400px;
+  text-align: center;
 }
 
 @keyframes Gradient {

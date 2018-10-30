@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getQuotesRequest } from '../../actions/Quotes';
+import { getQuotesRequest, quoteSaving } from '../../actions/Quotes';
 import Quotes from '../Quotes/Quotes';
 
 import './App.css';
@@ -42,42 +42,61 @@ const testQuoteSaved = [
 class App extends Component {
   constructor(props){
     super(props)
-      this.state = {}
-      this.onGetQuote = this.onGetQuote.bind(this)
+      this.state = {
+        saved: []
+      }
+      this.onGetQuote = this.onGetQuote.bind(this);
+      this.avalibleQuote = this.avalibleQuote.bind(this);
+      this.onSaveQuote = this.onSaveQuote.bind(this)
   }
 
-  onGetQuote(){
-    this.props.getQuote()
-  }
   componentWillMount(){
     this.props.getQuote();
-    let quote = this.props.quotes.quote ? this.props.quotes : "\"At moment not quote avalible click to get one!\"";
-    this.setState({
-      "quote": quote
-    })
   }
 
-  avalibleQuote(quote){
-    let current = quote.quote;
-    let author = quote.author;
-    return(
-      <div className="quote-zone">
-        <p>{current}</p>
-        <h3>{author}</h3>
-      </div>
-    )
+  onGetQuote(e){
+    e.preventDefault();
+    e.isPropagationStopped();
+    this.props.getQuote()
   }
-  render() {
-    const currentQuote = this.avalibleQuote(this.props.quotes);
-    console.log(currentQuote, 'im programing');
+
+  onSaveQuote(e,param){
+    e.preventDefault();
+    e.isPropagationStopped();
+    this.setState({
+      saved: this.state.saved.push(param)
+    })
+    this.props.quoteSaving(param);
+  }
+
+  avalibleQuote(quoteParam){   
+    console.log(quoteParam, 'teste') 
+    let content = <div>${"\"At moment not quote avalible click to get one!\""}</div>;
+    if(quoteParam){
+      content = (
+        <div className="quote-zone">
+          <p>{quoteParam.quote}</p>
+          <h3>{quoteParam.author}</h3>
+        </div> 
+      )
+    }
     
+    return content
+  }
+
+  render() { 
+    const currenQuote = this.props.quotes;
+    const currenQuoteFormat = this.avalibleQuote(currenQuote);
+
     return (
       <section className="app-wrapper">
         <header className="app-header">
           <label>Get Quote</label>
           <div>
-            <button onClick={this.onGetQuote}>Get</button>
-            <button>Save Quotes</button>
+            <div>
+              <button onClick={this.onGetQuote}>Get</button>
+              <button onClick={(e) => this.onSaveQuote(e,currenQuote)}>Save Quotes</button>
+            </div>
           </div>
         </header>
         <main>
@@ -88,7 +107,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {  
   return {
     quotes: state.quotes
   }
@@ -97,7 +116,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {  
   return {
     dispatch,
-    getQuote: () => dispatch(getQuotesRequest())
+    getQuote: () => dispatch(getQuotesRequest()),
+    quoteSaving: (param) => dispatch(quoteSaving(param))
   };
 };
 

@@ -1,22 +1,23 @@
 import {
     QUOTES_RESQUEST_SUCCES,
-    QUOTES_RESQUEST_FAILURE
+    // QUOTES_RESQUEST_FAILURE,
+    QUOTE_SAVING
 } from '../actions/Quotes';
 
-import { concat } from 'ramda'
+// import { concat,always } from 'ramda'
 const initialState = {
     savedQuotes: [],
-    quote: {}
+    quote: {},
 };
 
 function Quotes(state = initialState, action) {
     switch (action.type) {
         case QUOTES_RESQUEST_SUCCES:
-
-            //concat(state, action.data)
-            return state.quote = action.data;
-        case QUOTES_RESQUEST_FAILURE:
-            return action.data
+            // return state.quote = action.data;
+            
+            return Object.assign({}, state, {quote: action.data})
+        case QUOTE_SAVING:
+            return state
         default:
             return state;
     }
