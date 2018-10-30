@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getQuotesRequest, quoteSaving } from '../../actions/Quotes';
+import { getQuotesRequest, quoteSaving, isCounter } from '../../actions/Quotes';
 import Quotes from '../Quotes/Quotes';
 
 import './App.css';
@@ -47,7 +47,8 @@ class App extends Component {
       }
       this.onGetQuote = this.onGetQuote.bind(this);
       this.avalibleQuote = this.avalibleQuote.bind(this);
-      this.onSaveQuote = this.onSaveQuote.bind(this)
+      this.onSaveQuote = this.onSaveQuote.bind(this);
+      this.counter = this.counter.bind(this);
   }
 
   componentWillMount(){
@@ -63,14 +64,10 @@ class App extends Component {
   onSaveQuote(e,param){
     e.preventDefault();
     e.isPropagationStopped();
-    this.setState({
-      saved: this.state.saved.push(param)
-    })
     this.props.quoteSaving(param);
   }
 
-  avalibleQuote(quoteParam){   
-    console.log(quoteParam, 'teste') 
+  avalibleQuote(quoteParam){
     let content = <div>${"\"At moment not quote avalible click to get one!\""}</div>;
     if(quoteParam){
       content = (
@@ -84,14 +81,21 @@ class App extends Component {
     return content
   }
 
+  counter(){
+    console.log(this.props);
+    this.props.counterFromMap()
+  }
+
   render() { 
     const currenQuote = this.props.quotes;
+    const savedQuotes = this.props.savedQuotes;
     const currenQuoteFormat = this.avalibleQuote(currenQuote);
 
     return (
       <section className="app-wrapper">
         <header className="app-header">
           <label>Get Quote</label>
+          {currenQuoteFormat}
           <div>
             <div>
               <button onClick={this.onGetQuote}>Get</button>
@@ -100,7 +104,8 @@ class App extends Component {
           </div>
         </header>
         <main>
-          <Quotes allQuotes={testQuoteSaved}></Quotes>
+          <button onClick={this.counter}>Counter</button>
+          <Quotes allQuotes={savedQuotes}></Quotes>
         </main>
       </section>
     );
@@ -109,7 +114,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {  
   return {
-    quotes: state.quotes
+    quotes: state.quotes.quote, 
+    savedQuotes: state.quotes.savedQuotes,
   }
 };
 
@@ -117,7 +123,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
     getQuote: () => dispatch(getQuotesRequest()),
-    quoteSaving: (param) => dispatch(quoteSaving(param))
+    quoteSaving: (param) => dispatch(quoteSaving(param)),
+    counterFromMap: () => dispatch(isCounter())
   };
 };
 
