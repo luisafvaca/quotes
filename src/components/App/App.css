@@ -6,7 +6,7 @@
 }
 
 .app-header {
-  height: 50%;
+  min-height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,8 +21,21 @@
 
 .quote-zone {
   font-size: 15px;
-  width: 400px;
+  max-width: 400px;
   text-align: center;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+
+button {
+  border: none;
+  background: transparent;
+  padding: 10px;
+  cursor: pointer;
+  color: #ffff;
 }
 
 @keyframes Gradient {

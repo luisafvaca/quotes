@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 
 import {map} from 'ramda';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark} from '@fortawesome/free-solid-svg-icons'
+
 import './Quotes.css';
 class saveCuotes extends Component{
 
@@ -9,7 +12,7 @@ class saveCuotes extends Component{
         return map(function(item, i){
             return(
                 <div className="card" key={i}>
-                    <div className="bookmark"></div>
+                    <FontAwesomeIcon icon={faBookmark} className="bookmark"></FontAwesomeIcon>
                     <p>"{item.quote}"</p>
                     <h3>{item.author}</h3>
                 </div>

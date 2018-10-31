@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getQuotesRequest, quoteSaving, isCounter } from '../../actions/Quotes';
 import Quotes from '../Quotes/Quotes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRedoAlt, faSave} from '@fortawesome/free-solid-svg-icons'
 
 import './App.css';
 
@@ -69,8 +71,12 @@ class App extends Component {
           {currenQuoteFormat}
           <div>
             <div>
-              <button onClick={this.onGetQuote}>Get</button>
-              <button onClick={(e) => this.onSaveQuote(e,currenQuote)}>Save Quotes</button>
+              <button onClick={this.onGetQuote}>
+                <FontAwesomeIcon icon={faRedoAlt}></FontAwesomeIcon>
+              </button>
+              <button onClick={(e) => this.onSaveQuote(e,currenQuote)}>
+                <FontAwesomeIcon icon={faSave}></FontAwesomeIcon>
+              </button>
             </div>
           </div>
         </header>

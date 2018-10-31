@@ -22,39 +22,8 @@
 }
 
 .bookmark {
-    width: 40px;
-    height: 10px;
-    background-color:rgb(215, 82, 142);
     position: absolute;
-    top: 0;
-    right: 3px;
-}
-
-.bookmark::after{
-    content: "";
-    width: 0;
-    height: 0;
-    border-bottom: solid 15px transparent;
-    border-right: solid 15px transparent;
-    border-left: solid 15px transparent;
-    border-top: solid 15px rgb(215, 82, 142);
-    position: absolute;
-    transform: rotate(136deg);
-    left: -15px;
-    top: -4px;
-}
-
-.bookmark::before {
-    content: "";
-    width: 0;
-    height: 0;
-    border-bottom: solid 15px transparent;
-    border-right: solid 15px transparent;
-    border-left: solid 15px transparent;
-    border-top: solid 15px rgb(215, 82, 142);;
-    position: absolute;
-    -webkit-transform: rotate(136deg);
-    transform: rotate(225deg);
-    left: 24.5px;
-    top: -4px;
+    top: -1px;
+    right: 5px;
+    color: #e53788;
 }
