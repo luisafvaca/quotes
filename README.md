@@ -2,6 +2,9 @@
 
 👩‍💻
 
+![Alt text](./src/resources/images/screen.png?raw=true "Title")
+
+
 1. This app contains the follow technologies:
     - React.js
     - Redux.js
@@ -11,3 +14,4 @@
     - `$ git clone`
     - `$ npm install`
     - `$ npm start`
+
