@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getQuotesRequest, quoteSaving, isCounter } from '../../actions/Quotes';
 import Quotes from '../Quotes/Quotes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRedoAlt, faSave} from '@fortawesome/free-solid-svg-icons'
+import { faRedoAlt, faSave, faSpinner} from '@fortawesome/free-solid-svg-icons'
 
 import './App.css';
 
@@ -39,11 +39,11 @@ class App extends Component {
   avalibleQuote(quoteParam, onRequest){
     console.log(onRequest, 'onRequest', quoteParam)
     if(onRequest){
-      return(<div className="quote-zone">
-        <p>Pending...</p>
-      </div>
-    )
-    }else if(onRequest === false && quoteParam ){
+      return(
+        <div className="quote-zone">
+          <FontAwesomeIcon icon={faSpinner}></FontAwesomeIcon>
+        </div>
+      )}else if(onRequest === false && quoteParam ){
       return (
         <div className="quote-zone">
         <p>{quoteParam.quote}</p>
@@ -80,6 +80,9 @@ class App extends Component {
             </div>
           </div>
         </header>
+        <div class="seperator-wrapper">
+          <div class="seperator gradient"></div>
+        </div>
         <main>
           <button onClick={this.counter}>Counter</button>
           <Quotes allQuotes={savedQuotes}></Quotes>

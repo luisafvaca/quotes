@@ -38,6 +38,30 @@ button {
   color: #ffff;
 }
 
+.seperator-wrapper {
+  width: 100%; 
+}
+
+.seperator {
+  width: 3000px;
+  height: 5px;
+  animation: rotate 3s infinite linear;
+}
+
+.gradient {
+  background: linear-gradient(to right,  rgba(48,255,144,1) 0%,rgba(237,45,237,1) 25%,rgba(201,152,38,1) 50%,rgba(48,255,230,1) 75%,rgba(48,255,144,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1 ); /* IE6-9 */
+}
+
+@keyframes rotate {
+  from {
+    background-position: -3000px;
+  }
+  to { 
+    background-position: 0px;
+  }
+}
+
 @keyframes Gradient {
 	0% {
 		background-position: 0% 50%
